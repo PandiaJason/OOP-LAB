@@ -1,7 +1,6 @@
 package com.bank;
 
 import com.bank.accounts.SavingsAccount;
-import com.bank.accounts.CurrentAccount;
 import java.util.Scanner;
 
 public class Main {
@@ -15,20 +14,12 @@ public class Main {
         double savingsInterestRate = scanner.nextDouble();
         SavingsAccount savings = new SavingsAccount(savingsInitialBalance, savingsInterestRate);
 
-        // Get input for Current Account
-        System.out.println("Enter initial balance for Current Account: ");
-        double currentInitialBalance = scanner.nextDouble();
-        System.out.println("Enter overdraft limit for Current Account: ");
-        double overdraftLimit = scanner.nextDouble();
-        CurrentAccount current = new CurrentAccount(currentInitialBalance, overdraftLimit);
-
         boolean continueOperations = true;
 
         while (continueOperations) {
             System.out.println("\nSelect account to operate on:");
             System.out.println("1. Savings Account");
-            System.out.println("2. Current Account");
-            System.out.println("3. Exit");
+            System.out.println("2. Exit");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -37,8 +28,6 @@ public class Main {
                     break;
                 case 2:
                     handleCurrentAccountOperations(scanner, current);
-                    break;
-                case 3:
                     continueOperations = false;
                     break;
                 default:
@@ -81,30 +70,4 @@ public class Main {
         }
     }
 
-    private static void handleCurrentAccountOperations(Scanner scanner, CurrentAccount current) {
-        System.out.println("\nCurrent Account Balance: " + current.getBalance());
-        System.out.println("1. Deposit");
-        System.out.println("2. Withdraw");
-        System.out.println("3. Back to Main Menu");
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case 1:
-                System.out.println("Enter amount to deposit: ");
-                double deposit = scanner.nextDouble();
-                current.deposit(deposit);
-                System.out.println("New Balance: " + current.getBalance());
-                break;
-            case 2:
-                System.out.println("Enter amount to withdraw: ");
-                double withdraw = scanner.nextDouble();
-                current.withdraw(withdraw);
-                System.out.println("New Balance: " + current.getBalance());
-                break;
-            case 3:
-                break;
-            default:
-                System.out.println("Invalid choice. Please try again.");
-        }
-    }
 }
